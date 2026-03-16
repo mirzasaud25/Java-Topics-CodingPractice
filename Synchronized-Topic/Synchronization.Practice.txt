@@ -1,0 +1,73 @@
+package synhronizationpractice;
+
+class ATM
+{
+    synchronized public void CheckBalance(String name)
+    {
+        System.out.println( name +" "+" Checking ");
+        try 
+        {
+          Thread.sleep(1000);  
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println("Balance");
+    }
+    synchronized public void WithDraw(String name ,int amount)
+    {
+        System.out.println(name + "  "+" Withdrawing ");
+        try
+        {
+            Thread.sleep(1000);
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println(amount);
+    }
+}
+class Customer extends Thread 
+{
+    ATM atm;
+    int Balance;
+    String Name;
+    
+    public Customer(String Name,ATM at ,int Balance)
+    {
+        this.Name=Name ; 
+        this.Balance=Balance;
+        atm=at;
+        
+    }
+    public void UseAtm()
+    {
+       atm.CheckBalance(Name);
+       atm.WithDraw(Name, Balance);
+    }
+    public void run()
+    {
+        UseAtm();
+    }
+    
+}
+            
+
+
+public class SynhronizationPractice {
+
+    
+    public static void main(String[] args) 
+    {
+        ATM t=new ATM();
+        Customer t1 =new Customer("Mirza Hassan", t ,500);
+        Customer t2 =new Customer ("Mirza Saud",t ,200);
+        t1.start();
+        t2.start();
+       
+    }
+    
+}
