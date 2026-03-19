@@ -1,0 +1,95 @@
+package multiprogram;
+
+class BankAccount
+{
+    private int Balance;
+    private String name;
+    boolean accountStatus;
+    
+    
+    public BankAccount(String name,int balance)
+   { 
+       this.Balance=balance;
+       this.name = name;
+       accountStatus = true;
+            
+   }
+   synchronized  public void deposit(int balance)throws Exception
+    {
+        if(accountStatus == false)
+        {
+         throw new Exception("Account Not Found");
+        }
+        if(balance <= 0)
+        {
+         throw new Exception("Deposit Amount Invalid");
+        }
+        Balance+=balance;
+        System.out.println("Updated Balance "+Balance);
+        
+    }
+   synchronized public void withdraw(int withdraw)throws Exception
+    {
+         if(accountStatus == false)
+        {
+         throw new Exception("Account Not Found");
+        }
+        if(withdraw > Balance)
+        {    
+           throw new Exception("Withdraw Amount Invalid ");
+        }
+          this.Balance-=withdraw;
+          System.out.println("Remaining Balance "+Balance);
+    }
+    
+}
+class Customer implements Runnable
+{
+    private BankAccount account;
+    private String transactiontype;
+    private int amt;
+    
+    public Customer(BankAccount account ,String transactiontype ,int amt)
+    {
+        this.account = account;
+        this.transactiontype =transactiontype;
+        this.amt =amt;
+    }
+    
+    @Override
+    public void run()
+    {
+         try
+          {
+                if(transactiontype.equalsIgnoreCase("deposit"))
+                {
+                    account.deposit(amt);   
+                }
+                else if(transactiontype.equalsIgnoreCase("withdraw"))
+                {
+                  account.withdraw(amt);
+                }
+          }
+          catch(Exception e)
+          {
+                System.out.println(e);
+          }  
+    
+ }
+}
+
+public class Multiprogram 
+{
+
+  
+    public static void main(String[] args)
+    {
+        BankAccount bank =new BankAccount("Saud ",5000);
+        
+        Customer cou1= new Customer( bank ,"deposit",500);
+    
+        
+      
+    }
+    
+}
