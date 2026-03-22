@@ -1,0 +1,59 @@
+package loops;
+      
+class Store
+{
+    Member member[]=new Member[10];
+    int count=0;
+    
+    public void register(Member m)
+    {
+        member[count++]=m;
+    }
+    public void inviteSale()
+    {
+        for(int i=0;i<count;i++)
+        
+            member[i].callback();  
+    }
+    
+}
+interface Member
+{
+    void callback();
+}
+
+class customer implements Member 
+{
+    String name;
+    
+    public customer(String name)
+    {
+        this.name=name;
+    }
+    @Override
+    public void callback()
+    {
+        System.out.println("Ok,I will vist"+name );
+    }
+}
+     
+public class Loops
+{      
+    
+   
+    public static void main(String[] args) 
+    {
+        Store s=new Store();
+        customer c1=new customer("Mirza");
+        customer c2=new customer ("Saud");
+        
+        s.register(c1);
+        s.register(c2);
+        
+        s.inviteSale();
+        
+          
+       
+    }
+    
+}
