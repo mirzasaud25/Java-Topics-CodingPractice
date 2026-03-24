@@ -1,0 +1,48 @@
+package scmethod;
+
+
+class Outer
+{
+    int X=10;
+    static int Y=20;
+    
+    static class Inner 
+    {
+        int b=50;
+        public void show()
+        {
+            System.out.println(b+" "+Y);
+        }
+    }
+    public void outerdisplay() //static class ko acess karny ky liye hai yah method 
+    {
+        Inner i=new Inner();
+        i.show();
+        System.out.println(Y +" "+X);
+    }
+}
+    
+ 
+ 
+//    }
+
+
+public class SCmethod {
+   
+    public static void main(String[] args)
+    {
+        Outer.Inner o=new Outer.Inner();// diirectly acess to inner class with outer object
+        o.show();
+        
+        
+        
+            
+        
+        
+       
+        
+    
+    
+}
+    
+}
