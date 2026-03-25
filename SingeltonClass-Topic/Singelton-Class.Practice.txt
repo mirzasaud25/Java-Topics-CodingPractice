@@ -1,0 +1,71 @@
+package staticprogram;
+
+class CoffeeMachine
+{
+    private float waterQty;
+    private float sugerQty;
+    private float coffeeQty;
+    private float milkQty;
+    
+    static private CoffeeMachine My=null;
+    static private int  Count=1;
+    
+    private CoffeeMachine()
+    {
+        waterQty= 1;
+        sugerQty=1;
+        milkQty=1;
+        coffeeQty=1;
+    }
+    static public CoffeeMachine getInstance()
+    {
+        if(Count < 5)
+        
+       {   
+           if(My == null)
+            {    
+            My=new CoffeeMachine();
+            
+            }
+           Count++;
+            
+        }
+        
+        return My;
+    }
+    public float MakingCoffee()
+    {
+        return 0.9f;
+    }
+    public void setwaterQty(float qty)
+    {
+        waterQty=qty;
+    }
+    public void setcoffePower(float qty)
+    {
+        coffeeQty=qty;
+    }
+    public void setmilkQty(float qty)
+    {
+        milkQty=qty;
+    }        
+    
+}
+public class Staticprogram {
+
+    public static void main(String[] args) 
+    {
+        CoffeeMachine m1=CoffeeMachine.getInstance();
+        CoffeeMachine m2=CoffeeMachine.getInstance();
+        CoffeeMachine m3=CoffeeMachine.getInstance();
+          CoffeeMachine m4=CoffeeMachine.getInstance();
+        CoffeeMachine m5=CoffeeMachine.getInstance();
+//          CoffeeMachine m6=CoffeeMachine.getInstance();
+        
+        System.out.println(m1+"\n "+m2+"\n "+m3+"\n "+m4+"\n "+m5+"\n ");
+        if (m1==m2 && m1==m3)
+            System.out.println("Same");
+   
+    }
+    
+}
