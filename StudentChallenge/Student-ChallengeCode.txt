@@ -1,0 +1,122 @@
+package studenttest;
+
+class person
+{
+    String name;
+    
+    person(String name)
+    {
+        this.name=name;
+    }
+    public void show ()
+    {
+        System.out.println("Name :"+name);
+    }
+}
+
+class student extends person
+{  
+    int roll;
+    
+    student(String name ,int roll)
+    {
+        super(name);
+        this.roll=roll;
+    }
+    @Override
+    public void show()
+    {
+        System.out.println("Name :"+name+" | Roll No :"+roll);
+    }
+}
+interface payable
+{
+    void payment();
+}
+class Teacher extends person implements payable
+{
+    
+    Teacher (String name)
+    {
+        super(name);    
+    }
+    public void teach()
+    {
+        System.out.println("Teacher is Teaching...!");
+    }
+    @Override
+    public void show()
+    {
+        System.out.println("Teacher Name :"+name);
+    }
+    @Override
+    public void payment()
+    {
+        System.out.println("Teacher Payment is Done");
+    }
+    
+}
+class course
+        
+{
+    
+    public void Timeshow()//Local inner class Practice
+    {
+        class Inner
+        {        
+            public void Timing()
+            {
+               System.out.println("Class Timing is 9:00 Am");
+            }
+        }
+        Inner i =new Inner();
+        i.Timing();    
+    }
+    class Report// Nested Inner class Practice 
+    {
+        public void information()
+        {
+        System.out.println("Course reported Created");
+        }     
+    }
+    static class info// static Inner Class Practice
+    {
+        static void print()
+        {
+            System.out.println("Java Course Informatoin");
+        }
+    }
+    
+}
+
+public class Studenttest {
+
+
+    public static void main(String[] args) 
+    {
+        student s1=new student("Saud",102);
+        Teacher t1 =new Teacher ("Daniyal");
+        s1.show();
+        t1.show();
+        t1.teach();
+        t1.payment();
+        
+        course c=new course();
+        c.Timeshow();
+        
+        course.Report cr=new course().new Report();
+        cr.information();
+        course.info.print();
+        
+        
+        
+        
+        
+             
+         
+           
+         
+    }
+        
+    
+}
