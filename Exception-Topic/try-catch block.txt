@@ -1,0 +1,70 @@
+package synpractice;
+
+class BankAccount
+{
+     int balance;
+    
+    public void Deposit(int amount)
+    {
+         
+        System.out.print( "Account : ****-****--54" +" "+ "Desositing :"+amount);
+         
+        try
+        {
+           Thread.sleep(1000);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println("Current :"+(balance+amount));
+    }
+    public void withdraw(int amount)
+    {
+       System.out.print( "Account : ****-****--54" +" "+ "Withdraw :"+amount);
+         
+        try
+        {
+           Thread.sleep(1000);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println("Remaining :"+(balance-amount));
+    }
+       
+}
+class Bank extends Thread
+{
+    int amount;
+    BankAccount BA;
+    public Bank(int amt ,BankAccount b)
+    {
+        amount=amt;
+        BA =b;
+    }
+    public void UseBank()
+    {
+        BA.Deposit(amount);
+        BA.withdraw(amount);
+    }
+    public void run()
+    {
+        UseBank();
+    }
+    
+}
+public class Synpractice {
+
+    public static void main(String[] args)
+    {
+        BankAccount C =new BankAccount();
+        
+        Bank b1 =new Bank(1000,C);
+//        Bank b2 = new Bank(5000,C);
+                
+       
+    }
+    
+}
