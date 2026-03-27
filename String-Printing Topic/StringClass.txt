@@ -1,0 +1,21 @@
+package stringsimple;
+
+public class Stringsimple 
+{
+    public static void main(String[] args){         
+ 
+     
+     
+     String str ="   M  i  r  z  a  S  a  u  d  H  a  s  s  a   n   ";
+        
+     str=str.replaceAll("[\\s]+"," ").trim();
+           
+     String words[]=str.split("\\s"); 
+      
+     System.out.println(words.length);
+       
+     System.out.println(str);
+     
+    }
+    
+}
