@@ -1,0 +1,92 @@
+package practice2;
+
+class  MyData
+{
+    int Value;
+    boolean flag=true;
+    
+    synchronized public void set(int v)
+    {
+        while(flag!=true)
+        try
+        {
+            wait();
+        }    
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        Value=v;
+        flag=false;
+        notify();
+    }
+    synchronized public int get()
+    {
+        int x=0;
+        while(flag!=false)
+        try
+        {
+            wait();
+        } 
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        x=Value;
+        flag=true;
+        notify();
+        return x;
+    }
+}
+class Producer extends Thread
+{
+    MyData data;
+    
+    public Producer(MyData d)
+    {
+        data=d;
+    }
+    public void run()
+    {
+        int Count=1;
+        while(true)
+        {    
+        data.set(Count);
+        System.out.println("Producer :"+Count);
+        
+        Count++;
+        }
+    }
+}
+class Consumer extends Thread
+{
+    MyData data;
+    
+    public Consumer(MyData d)
+    {
+        data=d;
+    }
+    public void run()
+    {
+        int con;
+        while(true)
+        {    
+        con=data.get();
+        System.out.println("Consumer :"+ con);
+        }
+    }
+}
+
+public class Practice2 {
+
+   
+    public static void main(String[] args) {
+       MyData data=new MyData();
+       Producer p=new Producer(data);
+       Consumer d =new Consumer(data);
+       
+       p.start();
+       d.start();
+    }
+    
+}
